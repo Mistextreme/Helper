@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="caticus-blockMenu" id="bankMenu" style="display: none;">
+        <div class="blockMenu-wrapper">
+            <div class="blockMenu-container">
+                <div class="blockMenu-bg">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="blockMenu-everything">
+                    <div class="blockMenu-header">
+                        <div class="section-header">
+                            <div class="blockMenu-titles">
+                                <div class="blockMenu-title globalMenuHeader">Banking System</div>
+                                <div class="blockMenu-subtitle globalMenuText">Manage your finances</div>
+                            </div>
+                            <div class="separator">
+                                <div class="separator-highlight"></div>
+                            </div>
+                        </div>
+                        <div class="blockMenuRightSectionHeader">
+                            <div class="blockMenuRightSectionHeaderButtons">
+                                <div class="balance-display">
+                                    <i class="fas fa-wallet"></i>
+                                    <span id="balance-amount">$0</span>
+                                </div>
+                            </div>
+                            <div class="blockMenuRightSectionHeader__close-button blockmenuClose">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blockMenu-content">
+                        <div class="bank-sidebar">
+                            <div class="bank-tabs">
+                                <button class="bank-tab active" data-tab="overview">
+                                    <i class="fas fa-home"></i>
+                                    <span>Overview</span>
+                                </button>
+                                <button class="bank-tab" data-tab="deposit">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <span>Deposit</span>
+                                </button>
+                                <button class="bank-tab" data-tab="withdraw">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <span>Withdraw</span>
+                                </button>
+                                <button class="bank-tab" data-tab="transfer">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>Transfer</span>
+                                </button>
+                                <button class="bank-tab" data-tab="transactions">
+                                    <i class="fas fa-history"></i>
+                                    <span>Transactions</span>
+                                </button>
+                                <button class="bank-tab" data-tab="account">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>Account Info</span>
+                                </button>
+                                <button class="bank-tab" data-tab="loans">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <span>Loans</span>
+                                </button>
+                                <button class="bank-tab" data-tab="analytics">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Analytics</span>
+                                </button>
+                                <button class="bank-tab" data-tab="settings">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </button>
+                                <button class="bank-tab" data-tab="theme">
+                                    <i class="fas fa-palette"></i>
+                                    <span>Theme</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bank-content-area">
+                            <!-- Overview Tab -->
+                            <div class="bank-tab-content active" id="overview-tab">
+                                <div class="overview-section">
+                                    <div class="balance-card">
+                                        <div class="balance-label">Bank Balance</div>
+                                        <div class="balance-value" id="overview-balance">$0.00</div>
+                                        <div class="balance-subtitle">Available funds</div>
+                                    </div>
+                                    <div class="balance-card">
+                                        <div class="balance-label">Cash on Hand</div>
+                                        <div class="balance-value" id="overview-cash">$0.00</div>
+                                        <div class="balance-subtitle">Physical cash</div>
+                                    </div>
+                                </div>
+                                <div class="quick-actions">
+                                    <h3 class="section-title">Quick Actions</h3>
+                                    <div class="quick-actions-grid">
+                                        <button class="quick-action-btn" data-action="deposit">
+                                            <i class="fas fa-arrow-down"></i>
+                                            <span>Deposit</span>
+                                        </button>
+                                        <button class="quick-action-btn" data-action="withdraw">
+                                            <i class="fas fa-arrow-up"></i>
+                                            <span>Withdraw</span>
+                                        </button>
+                                        <button class="quick-action-btn" data-action="transfer">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            <span>Transfer</span>
+                                        </button>
+                                        <button class="quick-action-btn" data-action="transactions">
+                                            <i class="fas fa-history"></i>
+                                            <span>History</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Deposit Tab -->
+                            <div class="bank-tab-content" id="deposit-tab">
+                                <div class="transaction-section">
+                                    <h3 class="section-title">Deposit Money</h3>
+                                    <div class="form-group">
+                                        <label>Amount</label>
+                                        <input type="number" id="deposit-amount" placeholder="Enter amount" min="1" step="1">
+                                    </div>
+                                    <div class="form-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Cash Available: <strong id="deposit-cash-available">$0</strong></span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" id="deposit-btn">
+                                        <i class="fas fa-arrow-down"></i> Deposit
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Withdraw Tab -->
+                            <div class="bank-tab-content" id="withdraw-tab">
+                                <div class="transaction-section">
+                                    <h3 class="section-title">Withdraw Money</h3>
+                                    <div class="form-group">
+                                        <label>Amount</label>
+                                        <input type="number" id="withdraw-amount" placeholder="Enter amount" min="1" step="1">
+                                    </div>
+                                    <div class="form-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Bank Balance: <strong id="withdraw-balance-available">$0</strong></span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" id="withdraw-btn">
+                                        <i class="fas fa-arrow-up"></i> Withdraw
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Transfer Tab -->
+                            <div class="bank-tab-content" id="transfer-tab">
+                                <div class="transaction-section">
+                                    <h3 class="section-title">Transfer Money</h3>
+                                    <div class="form-group">
+                                        <label>Player ID</label>
+                                        <input type="number" id="transfer-target-id" placeholder="Enter player ID" min="1" step="1">
+                                        <button class="btn-secondary" id="refresh-players-btn">
+                                            <i class="fas fa-sync-alt"></i> Refresh Players
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Amount</label>
+                                        <input type="number" id="transfer-amount" placeholder="Enter amount" min="1" step="1">
+                                    </div>
+                                    <div class="form-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Bank Balance: <strong id="transfer-balance-available">$0</strong></span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" id="transfer-btn">
+                                        <i class="fas fa-exchange-alt"></i> Transfer
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Transactions Tab -->
+                            <div class="bank-tab-content" id="transactions-tab">
+                                <div class="transactions-section">
+                                    <h3 class="section-title">Transaction History</h3>
+                                    <div class="transactions-list" id="transactions-list">
+                                        <div class="empty-state">
+                                            <i class="fas fa-history"></i>
+                                            <p>No transactions yet</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Account Info Tab -->
+                            <div class="bank-tab-content" id="account-tab">
+                                <div class="account-section">
+                                    <h3 class="section-title">Account Information</h3>
+                                    <div class="info-cards">
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-id-card"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <div class="info-card-label">Account Number</div>
+                                                <div class="info-card-value" id="account-number">Loading...</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <div class="info-card-label">Account Created</div>
+                                                <div class="info-card-value" id="account-created">Loading...</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <div class="info-card-label">Total Transactions</div>
+                                                <div class="info-card-value" id="total-transactions">0</div>
+                                            </div>
+                                        </div>
+                                        <div class="info-card">
+                                            <div class="info-card-icon">
+                                                <i class="fas fa-dollar-sign"></i>
+                                            </div>
+                                            <div class="info-card-content">
+                                                <div class="info-card-label">Lifetime Deposits</div>
+                                                <div class="info-card-value" id="lifetime-deposits">$0.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Loans Tab -->
+                            <div class="bank-tab-content" id="loans-tab">
+                                <div class="loans-section">
+                                    <h3 class="section-title">Loan Management</h3>
+                                    
+                                    <div class="loan-request-section">
+                                        <h4 class="subsection-title">Request New Loan</h4>
+                                    <div class="form-group">
+                                        <label>Loan Amount</label>
+                                        <input type="number" id="loan-amount" placeholder="Enter amount" min="100" max="50000" step="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Repayment Period (Days)</label>
+                                        <select id="loan-period" class="form-select">
+                                            <option value="7">7 Days</option>
+                                            <option value="14">14 Days</option>
+                                            <option value="30" selected>30 Days</option>
+                                            <option value="60">60 Days</option>
+                                            <option value="90">90 Days</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Interest Rate: <strong id="loan-interest">5%</strong></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-calculator"></i>
+                                            <span>Total Repayment: <strong id="loan-total">$0.00</strong></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <span>Loan Limit: <strong id="loan-limit">$50,000</strong></span>
+                                        </div>
+                                    </div>
+                                        <button class="btn-primary" id="request-loan-btn">
+                                            <i class="fas fa-hand-holding-usd"></i> Request Loan
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="active-loans-section" style="margin-top: 30px;">
+                                        <h4 class="subsection-title">Active Loans</h4>
+                                        <div class="loans-list" id="loans-list">
+                                            <div class="empty-state">
+                                                <i class="fas fa-hand-holding-usd"></i>
+                                                <p>No active loans</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Analytics Tab -->
+                            <div class="bank-tab-content" id="analytics-tab">
+                                <div class="analytics-section">
+                                    <h3 class="section-title">Financial Analytics</h3>
+                                    
+                                    <div class="analytics-cards">
+                                        <div class="analytics-card">
+                                            <div class="analytics-icon">
+                                                <i class="fas fa-arrow-down"></i>
+                                            </div>
+                                            <div class="analytics-content">
+                                                <div class="analytics-label">Total Deposits</div>
+                                                <div class="analytics-value" id="total-deposits">$0.00</div>
+                                                <div class="analytics-change positive">This Month</div>
+                                            </div>
+                                        </div>
+                                        <div class="analytics-card">
+                                            <div class="analytics-icon">
+                                                <i class="fas fa-arrow-up"></i>
+                                            </div>
+                                            <div class="analytics-content">
+                                                <div class="analytics-label">Total Withdrawals</div>
+                                                <div class="analytics-value" id="total-withdrawals">$0.00</div>
+                                                <div class="analytics-change negative">This Month</div>
+                                            </div>
+                                        </div>
+                                        <div class="analytics-card">
+                                            <div class="analytics-icon">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </div>
+                                            <div class="analytics-content">
+                                                <div class="analytics-label">Total Transfers</div>
+                                                <div class="analytics-value" id="total-transfers">$0.00</div>
+                                                <div class="analytics-change neutral">This Month</div>
+                                            </div>
+                                        </div>
+                                        <div class="analytics-card">
+                                            <div class="analytics-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="analytics-content">
+                                                <div class="analytics-label">Net Change</div>
+                                                <div class="analytics-value" id="net-change">$0.00</div>
+                                                <div class="analytics-change" id="net-change-indicator">This Month</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="transaction-breakdown" style="margin-top: 30px;">
+                                        <h4 class="subsection-title">Transaction Breakdown</h4>
+                                        <div class="breakdown-list" id="breakdown-list">
+                                            <div class="breakdown-item">
+                                                <div class="breakdown-label">
+                                                    <i class="fas fa-arrow-down"></i> Deposits
+                                                </div>
+                                                <div class="breakdown-value" id="breakdown-deposits">0</div>
+                                            </div>
+                                            <div class="breakdown-item">
+                                                <div class="breakdown-label">
+                                                    <i class="fas fa-arrow-up"></i> Withdrawals
+                                                </div>
+                                                <div class="breakdown-value" id="breakdown-withdrawals">0</div>
+                                            </div>
+                                            <div class="breakdown-item">
+                                                <div class="breakdown-label">
+                                                    <i class="fas fa-exchange-alt"></i> Transfers Out
+                                                </div>
+                                                <div class="breakdown-value" id="breakdown-transfers-out">0</div>
+                                            </div>
+                                            <div class="breakdown-item">
+                                                <div class="breakdown-label">
+                                                    <i class="fas fa-exchange-alt"></i> Transfers In
+                                                </div>
+                                                <div class="breakdown-value" id="breakdown-transfers-in">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Settings Tab -->
+                            <div class="bank-tab-content" id="settings-tab">
+                                <div class="settings-section">
+                                    <h3 class="section-title">Bank Settings</h3>
+                                    <div class="settings-list">
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <div class="setting-label">Email Notifications</div>
+                                                <div class="setting-desc">Receive email alerts for transactions</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <div class="setting-label">SMS Notifications</div>
+                                                <div class="setting-desc">Receive SMS alerts for large transactions</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <div class="setting-label">Transaction Alerts</div>
+                                                <div class="setting-desc">Alert threshold for transactions</div>
+                                            </div>
+                                            <input type="number" class="setting-input" placeholder="$1000" value="1000">
+                                        </div>
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <div class="setting-label">Auto-Save</div>
+                                                <div class="setting-desc">Automatically save transaction receipts</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Theme Tab -->
+                            <div class="bank-tab-content" id="theme-tab">
+                                <div class="theme-section">
+                                    <h3 class="section-title">Theme Customization</h3>
+                                    <p class="theme-description">Choose a color theme for your banking interface</p>
+                                    
+                                    <div class="themes-grid" id="themes-grid">
+                                        <!-- Themes will be populated by JavaScript -->
+                                    </div>
+                                    
+                                    <div class="theme-preview">
+                                        <h4 class="preview-title">Preview</h4>
+                                        <div class="preview-card">
+                                            <div class="preview-header">
+                                                <div class="preview-icon">
+                                                    <i class="fas fa-wallet"></i>
+                                                </div>
+                                                <div class="preview-content">
+                                                    <div class="preview-label">Bank Balance</div>
+                                                    <div class="preview-value" id="theme-preview-balance">$10,000.00</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
+
